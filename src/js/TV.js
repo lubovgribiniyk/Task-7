@@ -1,9 +1,9 @@
 import Device from "./Device";
 
 export default class TV extends Device {
-  constructor(maker, color) {
+  constructor(maker, color, channels = TV.DEFAULT_CHANNELS) {
     super(maker, color);
-    this._channels = TV.DEFAULT_CHANNELS;
+    this._channels = channels;
     this._currentChannel = this._channels[0];
     this._volume = TV.DEFAULT_VOLUME;
     this._offTimer = null;
