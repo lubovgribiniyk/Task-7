@@ -3,22 +3,24 @@ import Device from "./Device";
 export default class VacuumCleaner extends Device {
   constructor(maker, color) {
     super(maker, color);
-    this._mode = "";
+    this._mode = VacuumCleaner.SUPPORTED_MODES[0];
     this._isCharged = false;
-    this._garbage = false;
+    this._hasHarbage = false;
   }
   turnOn() {
-    if (this._mode && this._isCharged && !this._garbage) {
+    if (this._mode && this._isCharged && !this._hasHarbage) {
       super.turnOn();
     }
   }
   turnOff() {
     super.turnOff();
     this._isCharged = false;
-    this._garbage = true;
+    this._hasHarbage = true;
   }
   set mode(mode) {
-    this._mode = mode;
+    if (VacuumCleaner.SUPPORTED_MODES.indexOf(mode) !== -1) {
+      this._mode = mode;
+    }
   }
   get mode() {
     return this._mode;
@@ -26,9 +28,17 @@ export default class VacuumCleaner extends Device {
   charge() {
     this._isCharged = true;
   }
+  get isCharged() {
+    return this._isCharged;
+  }
+  get hasHarbage() {
+    return this._hasHarbage;
+  }
   cleanGarbage() {
-    if (this._garbage) {
-      this._garbage = false;
+    if (this._hasHarbage) {
+      this._hasHarbage = false;
     }
   }
 }
+
+VacuumCleaner.SUPPORTED_MODES = ["dry", "wet", "carpet"];

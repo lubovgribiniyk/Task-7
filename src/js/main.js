@@ -3,7 +3,7 @@ import TV from "./TV";
 import VacuumCleaner from "./VacuumCleaner";
 import WashingMachine from "./WashingMachine";
 
-const house = new House("Kharkiv, Ukraine", 4);
+const house = new House("Kharkiv, Ukraine", 4, "Oleg");
 console.log(house);
 const tv = new TV("LG", "gray");
 console.log(tv);
