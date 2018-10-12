@@ -1,6 +1,19 @@
 import Device from "./Device";
 
 export default class TV extends Device {
+  static get MIN_VOLUME() {
+    return 0;
+  }
+  static get MAX_VOLUME() {
+    return 10;
+  }
+  static get DEFAULT_VOLUME() {
+    return 5;
+  }
+  static get DEFAULT_CHANNELS() {
+    return ["BBC", "SkyNews", "Sport"];
+  }
+
   constructor(maker, color, channels = TV.DEFAULT_CHANNELS) {
     super(maker, color);
     this._channels = channels;
@@ -62,8 +75,3 @@ export default class TV extends Device {
     return !!this._offTimer;
   }
 }
-
-TV.MIN_VOLUME = 0;
-TV.MAX_VOLUME = 10;
-TV.DEFAULT_VOLUME = 5;
-TV.DEFAULT_CHANNELS = ["BBC", "SkyNews", "Sport"];

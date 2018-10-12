@@ -1,6 +1,10 @@
 import Device from "./Device";
 
 export default class WashMachine extends Device {
+  static get SUPPORTED_MODES() {
+    return ["color", "manual", "white"];
+  }
+
   constructor(maker, color) {
     super(maker, color);
     this._mode = WashMachine.SUPPORTED_MODES[0];
@@ -37,5 +41,3 @@ export default class WashMachine extends Device {
     return this._clothes;
   }
 }
-
-WashMachine.SUPPORTED_MODES = ["color", "manual", "white"];

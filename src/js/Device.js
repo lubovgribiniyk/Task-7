@@ -1,9 +1,11 @@
+let id = 0;
+
 export default class Device {
   constructor(maker, color) {
     this._maker = maker;
     this._color = color;
     this._isOn = false;
-    this._id = Math.round(Math.random() * 10e6);
+    this._id = ++id;
   }
   turnOn() {
     if (!this._isOn) {

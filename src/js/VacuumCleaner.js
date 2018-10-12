@@ -1,6 +1,10 @@
 import Device from "./Device";
 
 export default class VacuumCleaner extends Device {
+  static get SUPPORTED_MODES() {
+    return ["dry", "wet", "carpet"];
+  }
+
   constructor(maker, color) {
     super(maker, color);
     this._mode = VacuumCleaner.SUPPORTED_MODES[0];
@@ -40,5 +44,3 @@ export default class VacuumCleaner extends Device {
     }
   }
 }
-
-VacuumCleaner.SUPPORTED_MODES = ["dry", "wet", "carpet"];
