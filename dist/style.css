@@ -1,0 +1,328 @@
+html, body {
+  height: 100%;
+  margin: 0; }
+
+#root {
+  display: grid;
+  grid-template-columns: 22rem 1fr;
+  height: 100%; }
+
+.sidebar {
+  padding: 20px;
+  background-color: #8269adb8; }
+
+.main {
+  padding: 10px 35px;
+  background-color: #ccc; }
+
+.house-heading {
+  margin-bottom: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+  .house-heading__text {
+    margin: 0;
+    font-size: 30px;
+    text-transform: uppercase; }
+
+.house-logo {
+  width: 60px;
+  height: 60px;
+  margin-right: 15px; }
+
+.house-state {
+  border-bottom: 1px solid white;
+  border-top: 1px solid white;
+  margin-bottom: 20px;
+  list-style: none; }
+  .house-state__item {
+    margin: 10px 0;
+    font-family: "Calibri";
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase; }
+
+.add-device__title {
+  margin-bottom: 20px;
+  font-family: Arial;
+  font-size: 24px;
+  color: #fff;
+  text-align: center; }
+
+.add-device__select {
+  margin-bottom: 25px;
+  width: 100%;
+  height: 40px;
+  font-size: 20px;
+  font-weight: 600;
+  background-color: #fff;
+  padding: 0 10px;
+  border: 2px solid black; }
+  .add-device__select:focus {
+    outline: 0; }
+
+.add-device__button {
+  border: none;
+  border-radius: 3px;
+  width: 100%;
+  height: 40px;
+  font-size: 20px;
+  background-color: #fff;
+  color: #000;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  -webkit-transition: background-color .3s linear;
+  transition: background-color .3s linear; }
+  .add-device__button:hover {
+    background-color: #fffec9; }
+  .add-device__button:focus {
+    outline: 0; }
+
+.device-container {
+  margin-bottom: 25px;
+  border: 4px solid white;
+  max-width: 1000px;
+  padding: 10px;
+  position: relative; }
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+
+.washing-machine {
+  padding: 10px; }
+  .washing-machine__img {
+    margin-right: 35px;
+    width: 300px; }
+
+.title {
+  margin-bottom: 25px;
+  font-size: 24px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #8269ad; }
+
+.subtitle {
+  margin-right: 20px;
+  font-size: 19px;
+  font-weight: 600;
+  color: #3a1084; }
+
+.state-light {
+  display: inline-block;
+  border: 1px solid white;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px; }
+  .state-light__on {
+    background-color: green; }
+  .state-light__off {
+    background-color: red; }
+
+.mode-block {
+  margin-bottom: 25px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center; }
+
+.select-mode {
+  width: 150px;
+  height: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #fff;
+  padding: 0 10px;
+  border: 2px solid #3a1084; }
+  .select-mode:focus {
+    outline: 0; }
+
+.clothes-list {
+  margin: 25px 0 40px;
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  list-style: none; }
+  .clothes-list__item {
+    margin: 0 10px;
+    width: 50px;
+    height: 50px;
+    background: center/cover no-repeat;
+    cursor: pointer; }
+    .clothes-list__item_skirt {
+      background-image: url("../src/img/skirt.png"); }
+    .clothes-list__item_shirt {
+      background-image: url("../src/img/shirt.png"); }
+    .clothes-list__item_shorts {
+      background-image: url("../src/img/shorts.png"); }
+    .clothes-list__item_pants {
+      background-image: url("../src/img/pants.png"); }
+    .clothes-list__item_dress {
+      background-image: url("../src/img/dress.png"); }
+  .clothes-list__added-item {
+    width: 30px;
+    height: 30px; }
+
+.powder {
+  margin-bottom: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center; }
+
+.powder-icon {
+  margin-right: 20px;
+  width: 60px;
+  height: 60px;
+  background: url("../src/img/washing-powder.png") no-repeat center/cover; }
+
+.powder-text {
+  font-family: "Calibri";
+  font-size: 18px;
+  color: #000;
+  font-weight: 600;
+  text-transform: uppercase; }
+
+.tv-block {
+  margin-right: 30px;
+  position: relative;
+  width: 350px;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto; }
+
+.user-panel {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto; }
+
+.state-wrapper, .state-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center; }
+
+.state-wrapper {
+  margin-bottom: 30px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between; }
+
+.state-light {
+  margin-right: 20px; }
+
+.state-text {
+  font-size: 18px;
+  text-transform: uppercase;
+  font-family: Arial;
+  font-weight: 600; }
+
+.tv-block__iframe {
+  position: absolute;
+  z-index: 2;
+  height: 160px;
+  bottom: 73px;
+  width: 295px;
+  left: 28px;
+  border: none; }
+
+.change-button, .light-button {
+  border: none;
+  margin: 0 10px;
+  background-color: #fff;
+  height: 30px;
+  font-size: 15px;
+  color: #c77213;
+  font-weight: 600;
+  width: 187px;
+  cursor: pointer; }
+  .change-button:focus, .light-button:focus {
+    outline: none; }
+  .change-button:hover, .light-button:hover {
+    background-color: #fffec9; }
+
+.tv-timer {
+  margin: 20px 10px; }
+  .tv-timer__title {
+    color: #3a1084; }
+  .tv-timer__input {
+    border: 2px solid #3a1084;
+    margin-right: 15px;
+    height: 28px;
+    width: 100px;
+    font-size: 16px;
+    font-weight: 600;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    padding: 5px; }
+  .tv-timer button {
+    border: none;
+    margin: 0 10px;
+    background-color: #fff;
+    height: 30px;
+    font-size: 15px;
+    color: #c77213;
+    font-weight: 600;
+    width: 187px;
+    cursor: pointer; }
+    .tv-timer button:focus {
+      outline: none; }
+    .tv-timer button:hover {
+      background-color: #fffec9; }
+
+.current-channel {
+  margin: 0 10px 25px;
+  text-transform: uppercase;
+  font-family: Arial;
+  font-weight: 600; }
+
+.delete-device {
+  position: absolute;
+  right: 20px;
+  height: 36px;
+  border: none;
+  background: white;
+  color: #3a1084;
+  padding: 0 10px;
+  font-size: 15px;
+  font-weight: 700;
+  bottom: 20px;
+  border-radius: 15px;
+  -webkit-transition: background-color .3s linear;
+  transition: background-color .3s linear;
+  cursor: pointer; }
+  .delete-device:focus {
+    outline: none; }
+  .delete-device:hover {
+    background-color: #fffec9; }
+
+.toggle-state-btn {
+  border: none;
+  border-radius: 15px;
+  padding: 0 15px;
+  background-color: #3a1084;
+  height: 36px;
+  font-family: Arial;
+  color: #fff;
+  font-size: 18px;
+  line-height: 36px;
+  text-transform: uppercase;
+  cursor: pointer; }
+  .toggle-state-btn:focus {
+    outline: none; }
