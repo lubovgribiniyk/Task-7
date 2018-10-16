@@ -21,12 +21,22 @@ module.exports = (env, argv) => {
           test: /\.scss$/,
           use: ExtractTextPlugin.extract({
             fallback: "style-loader",
-            use: ["css-loader?url=false", "postcss-loader", "sass-loader"]
+            use: ["css-loader", "postcss-loader", "sass-loader"]
           })
         },
         {
-          test: /\.(jpg|png)$/,
-          loader: "file-loader"
+          test: /\.(png|jpg|gif)$/i,
+          use: [
+            {
+              loader: "url-loader",
+              options: {
+                limit: 8192,
+                name: "[name].[hash:8].[ext]",
+                context: "",
+                publicPath: "img"
+              }
+            }
+          ]
         },
         {
           test: /\.svg$/,

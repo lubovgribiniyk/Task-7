@@ -2,7 +2,15 @@ import Device from "./Device";
 
 export default class WashingMachine extends Device {
   static get SUPPORTED_MODES() {
-    return ["color", "manual", "white"];
+    return ["color", "white", "manual"];
+  }
+
+  static get SUPPORTED_MODES_TIME() {
+    return {
+      color: 5,
+      white: 10,
+      manual: 15
+    };
   }
 
   constructor(maker, color) {
@@ -10,12 +18,29 @@ export default class WashingMachine extends Device {
     this._mode = WashingMachine.SUPPORTED_MODES[0];
     this._powder = false;
     this._clothes = [];
+    this._offTimer = null;
   }
-  turnOn() {
+  turnOn(callback) {
     if (this._mode) {
       super.turnOn();
+      this._offTimer = setTimeout(() => {
+        this.turnOff();
+        if (callback) {
+          callback();
+        }
+      }, WashingMachine.SUPPORTED_MODES_TIME[this.mode] * 1000);
     }
     this._powder = false;
+  }
+  turnOff() {
+    this.clearOffTimer();
+    super.turnOff();
+  }
+  clearOffTimer() {
+    if (this._offTimer) {
+      clearTimeout(this._offTimer);
+      this._offTimer = null;
+    }
   }
   addPowder() {
     this._powder = true;

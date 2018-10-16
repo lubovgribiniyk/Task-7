@@ -11,7 +11,13 @@ export default class ViewWashingMachine extends DeviceView {
   }
 
   _handleStateBtn() {
-    this._washingMachine.toggleState();
+    if (this._washingMachine.isOn) {
+      this._washingMachine.turnOff();
+    } else {
+      this._washingMachine.turnOn(() => {
+        this.render();
+      });
+    }
     this.render();
   }
   _handleModeChange(e) {
@@ -89,7 +95,9 @@ export default class ViewWashingMachine extends DeviceView {
 
       WashingMachine.SUPPORTED_MODES.forEach(mode => {
         const selectModeItem = document.createElement("option");
-        selectModeItem.innerText = mode;
+        selectModeItem.innerText = `${mode} (${
+          WashingMachine.SUPPORTED_MODES_TIME[mode]
+        }s)`;
         selectModeItem.value = mode;
         if (mode === this._washingMachine.mode) {
           selectModeItem.selected = true;
@@ -102,7 +110,9 @@ export default class ViewWashingMachine extends DeviceView {
       currentMode.innerText = "Выберите режим:";
       selectMode.addEventListener("change", this._handleModeChange.bind(this));
     } else {
-      currentMode.innerText = `Режим: ${this._washingMachine.mode}`;
+      currentMode.innerText = `Режим: ${this._washingMachine.mode} (${
+        WashingMachine.SUPPORTED_MODES_TIME[this._washingMachine.mode]
+      }s)`;
     }
 
     return modeHolder;
@@ -251,7 +261,11 @@ export default class ViewWashingMachine extends DeviceView {
 
     wmUserPanel.appendChild(stateHolder);
     wmUserPanel.appendChild(modeHolder);
-    wmUserPanel.appendChild(powderHolder);
+
+    if (!this._washingMachine.isOn) {
+      wmUserPanel.appendChild(powderHolder);
+    }
+
     wmUserPanel.appendChild(clothesHolder);
 
     washingMachine.appendChild(title);

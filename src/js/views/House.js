@@ -4,14 +4,15 @@ import VacuumCleaner from "../models/VacuumCleaner";
 import ViewWashingMachine from "./WashingMachine";
 import ViewTV from "./TV";
 
+import homeSvg from "../../img/home.svg";
+
 export default class ViewHouse {
   constructor(house, root) {
     this._house = house;
     this._root = root;
     this._devices = [
       { text: "телевизор", value: "tv" },
-      { text: "стиральная машина", value: "washing_machine" },
-      { text: "пылесос", value: "vacuum_cleaner" }
+      { text: "стиральная машина", value: "washing_machine" }
     ];
     this._deviceColors = [
       { text: "черный", value: "#000000" },
@@ -73,17 +74,20 @@ export default class ViewHouse {
     view.render();
   }
   _handleDeleteDevice(device, view) {
-    this._house.removeDevice(device);
-    view.destroy();
+    const userAnswer = confirm("Вы уверены что хотите удалить это устройство?");
+    if (userAnswer) {
+      this._house.removeDevice(device);
+      view.destroy();
+    }
   }
 
   _createHeadingBlock() {
     const houseHeading = document.createElement("div");
     houseHeading.classList.add("house-heading");
 
-    const houseLogo = document.createElement("img");
-    houseLogo.src = "/src/img/home.svg";
+    const houseLogo = document.createElement("div");
     houseLogo.classList.add("house-logo");
+    houseLogo.innerHTML = homeSvg;
 
     const houseHeadingText = document.createElement("h1");
     houseHeadingText.innerText = "My House";

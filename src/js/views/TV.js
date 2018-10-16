@@ -36,7 +36,14 @@ export default class viewTV extends DeviceView {
       this._updateTimerState();
     }
   }
-
+  _handleAddVolumeBtn() {
+    this._tv.upVolume();
+    this.render();
+  }
+  _handleSubVolumeBtn() {
+    this._tv.downVolume();
+    this.render();
+  }
   _updateTimerState() {
     const newTimerHolder = this._createTimerBlock();
     const currentTimerHolder = this._root.querySelector(".tv-timer");
@@ -103,6 +110,9 @@ export default class viewTV extends DeviceView {
       const tvIframe = document.createElement("iframe");
       tvIframe.src = this._tv.currentChannel.link;
       tvIframe.classList.add("tv-block__iframe");
+      tvIframe.style.width = "295px";
+      tvIframe.style.height = "160px";
+
       tvHolder.appendChild(tvIframe);
     }
 
@@ -178,6 +188,36 @@ export default class viewTV extends DeviceView {
 
     return timerHolder;
   }
+  _createSoundBlock() {
+    const soundHolder = document.createElement("div");
+    soundHolder.classList.add("sound-wrapper");
+
+    if (this._tv.isOn) {
+      const currentVolume = document.createElement("div");
+      currentVolume.classList.add("current-volume");
+      currentVolume.innerText = `Громкость: ${this._tv.volume}`;
+      soundHolder.appendChild(currentVolume);
+    }
+
+    const addVolumeBtn = document.createElement("button");
+    addVolumeBtn.type = "button";
+    addVolumeBtn.innerText = "Увеличить громкость";
+    addVolumeBtn.classList.add("change-button");
+    addVolumeBtn.disabled = this._tv.isOn ? false : true;
+    addVolumeBtn.addEventListener("click", this._handleAddVolumeBtn.bind(this));
+
+    const subVolumeBtn = document.createElement("button");
+    subVolumeBtn.type = "button";
+    subVolumeBtn.innerText = "Уменьшить громкость";
+    subVolumeBtn.classList.add("change-button");
+    subVolumeBtn.disabled = this._tv.isOn ? false : true;
+    subVolumeBtn.addEventListener("click", this._handleSubVolumeBtn.bind(this));
+
+    soundHolder.appendChild(subVolumeBtn);
+    soundHolder.appendChild(addVolumeBtn);
+
+    return soundHolder;
+  }
   render() {
     this._root.innerHTML = "";
 
@@ -196,6 +236,7 @@ export default class viewTV extends DeviceView {
 
     const channelHolder = this._createChannelBlock();
     const timerHolder = this._createTimerBlock();
+    const soundHolder = this._createSoundBlock();
 
     const deleteBtn = document.createElement("button");
     deleteBtn.type = "button";
@@ -211,6 +252,7 @@ export default class viewTV extends DeviceView {
     tvUserPanel.appendChild(stateHolder);
     tvUserPanel.appendChild(channelHolder);
     tvUserPanel.appendChild(timerHolder);
+    tvUserPanel.appendChild(soundHolder);
     tv.appendChild(deleteBtn);
 
     this._root.appendChild(tv);
