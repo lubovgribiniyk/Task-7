@@ -21,8 +21,16 @@ module.exports = (env, argv) => {
           test: /\.scss$/,
           use: ExtractTextPlugin.extract({
             fallback: "style-loader",
-            use: ["css-loader", "postcss-loader", "sass-loader"]
+            use: ["css-loader?url=false", "postcss-loader", "sass-loader"]
           })
+        },
+        {
+          test: /\.(jpg|png)$/,
+          loader: "file-loader"
+        },
+        {
+          test: /\.svg$/,
+          loader: "svg-inline-loader"
         }
       ]
     },

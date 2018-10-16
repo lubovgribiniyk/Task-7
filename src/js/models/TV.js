@@ -11,7 +11,23 @@ export default class TV extends Device {
     return 5;
   }
   static get DEFAULT_CHANNELS() {
-    return ["BBC", "SkyNews", "Sport"];
+    return [
+      {
+        name: "Sky News",
+        link:
+          "https://www.youtube.com/embed/XOacA3RYrXk?rel=0&controls=0&showinfo=0&autoplay=1&mute=1"
+      },
+      {
+        name: "Animals",
+        link:
+          "https://www.youtube.com/embed/CzaXBWch4wQ?rel=0&controls=0&showinfo=0&autoplay=1&mute=1"
+      },
+      {
+        name: "NASA",
+        link:
+          "https://www.youtube.com/embed/4993sBLAzGA?rel=0&controls=0&showinfo=0&autoplay=1&mute=1"
+      }
+    ];
   }
 
   constructor(maker, color, channels = TV.DEFAULT_CHANNELS) {
@@ -60,9 +76,10 @@ export default class TV extends Device {
   get volume() {
     return this._volume;
   }
-  setOffTimer(time) {
+  setOffTimer(time, callback) {
     this._offTimer = setTimeout(() => {
       this.turnOff();
+      callback();
     }, time * 1000);
   }
   clearOffTimer() {

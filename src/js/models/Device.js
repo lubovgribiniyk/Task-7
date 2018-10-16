@@ -17,6 +17,9 @@ export default class Device {
       this._isOn = false;
     }
   }
+  toggleState() {
+    this._isOn ? this.turnOff() : this.turnOn();
+  }
   get maker() {
     return this._maker;
   }

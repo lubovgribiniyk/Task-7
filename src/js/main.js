@@ -1,13 +1,12 @@
-import House from "./House";
-import TV from "./TV";
-import VacuumCleaner from "./VacuumCleaner";
-import WashingMachine from "./WashingMachine";
+import House from "./models/House";
+import TV from "./models/TV";
+import VacuumCleaner from "./models/VacuumCleaner";
+import WashingMachine from "./models/WashingMachine";
+import ViewWashingMachine from "./views/WashingMachine";
+import ViewHouse from "./views/House";
+import "../scss/index.scss";
 
-const house = new House("Kharkiv, Ukraine", 4, "Oleg");
-console.log(house);
-const tv = new TV("LG", "gray");
-console.log(tv);
-const vacuumCleaner = new VacuumCleaner("philips", "blue");
-console.log(vacuumCleaner);
-const washingMachine = new WashingMachine("philips", "white");
-console.log(washingMachine);
+const house = new House("Сумская, 10", 3, "Любовь");
+
+const viewHouse = new ViewHouse(house, document.getElementById("root"));
+viewHouse.render();

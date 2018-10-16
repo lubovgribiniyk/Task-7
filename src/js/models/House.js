@@ -6,7 +6,7 @@ export default class House {
     this._devices = new Map();
   }
   get devices() {
-    return this._devices;
+    return [...this._devices];
   }
   get floor() {
     return this._floor;
