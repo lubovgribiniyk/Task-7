@@ -36,49 +36,24 @@ export default class ViewHouse {
     const selectedColor = this._root.querySelector(".add-device__select_color")
       .value;
     let device;
-    let view;
-
-    const deviceContainer = document.createElement("div");
-    deviceContainer.classList.add("device-container");
-
-    this._root.querySelector(".main").appendChild(deviceContainer);
 
     if (selectedDevice === "washing_machine") {
       device = new WashingMachine(selectedMaker, selectedColor);
-      view = new ViewWashingMachine(
-        device,
-        deviceContainer,
-        this._handleDeleteDevice.bind(this)
-      );
-    }
-
-    if (selectedDevice === "tv") {
+    } else if (selectedDevice === "tv") {
       device = new TV(selectedMaker, selectedColor);
-      view = new ViewTV(
-        device,
-        deviceContainer,
-        this._handleDeleteDevice.bind(this)
-      );
-    }
-
-    if (selectedDevice === "vacuum_cleaner") {
+    } else if (selectedDevice === "vacuum_cleaner") {
       device = VacuumCleaner(selectedMaker, selectedColor);
-      view = new ViewVacuumCleaner(
-        device,
-        deviceContainer,
-        this._handleDeleteDevice.bind(this)
-      );
     }
 
     this._house.addDevice(device);
-    view.render();
+    this.render();
   }
-  _handleDeleteDevice(device, view) {
+  _handleDeleteDevice(device) {
     const userAnswer = confirm("Вы уверены что хотите удалить это устройство?");
     if (userAnswer) {
       this._house.removeDevice(device);
-      view.destroy();
     }
+    this.render();
   }
 
   _createHeadingBlock() {
@@ -168,6 +143,7 @@ export default class ViewHouse {
   }
 
   render() {
+    this._root.innerHTML = "";
     const house = document.createElement("div");
     house.classList.add("house");
 
@@ -176,6 +152,35 @@ export default class ViewHouse {
 
     const main = document.createElement("main");
     main.classList.add("main");
+
+    this._house.devices.forEach(device => {
+      const deviceContainer = document.createElement("div");
+      deviceContainer.classList.add("device-container");
+      main.appendChild(deviceContainer);
+
+      let view;
+      if (device instanceof TV) {
+        view = new ViewTV(
+          device,
+          deviceContainer,
+          this._handleDeleteDevice.bind(this)
+        );
+      } else if (device instanceof WashingMachine) {
+        view = new ViewWashingMachine(
+          device,
+          deviceContainer,
+          this._handleDeleteDevice.bind(this)
+        );
+      } else if (device instanceof VacuumCleaner) {
+        view = new ViewVacuumCleaner(
+          device,
+          deviceContainer,
+          this._handleDeleteDevice.bind(this)
+        );
+      }
+
+      view.render();
+    });
 
     const houseHeading = this._createHeadingBlock();
     const stateHolder = this._createStateBlock();

@@ -1,10 +1,9 @@
 import WashingMachine from "../models/WashingMachine";
-import DeviceView from "./DeviceView";
 import svgWashingMachine from "../../img/laundry.svg";
 
-export default class ViewWashingMachine extends DeviceView {
+export default class ViewWashingMachine {
   constructor(washingMachine, root, deleteDeviceFn) {
-    super(root);
+    this._root = root;
     this._washingMachine = washingMachine;
     this._deleteDeviceFn = deleteDeviceFn;
     this._listClothes = ["dress", "skirt", "shirt", "pants", "shorts"];
@@ -39,7 +38,7 @@ export default class ViewWashingMachine extends DeviceView {
     this.render();
   }
   _handleDeleteDeviceBtn() {
-    this._deleteDeviceFn(this._washingMachine, this);
+    this._deleteDeviceFn(this._washingMachine);
   }
 
   _createTitleBlock() {

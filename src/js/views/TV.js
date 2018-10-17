@@ -1,11 +1,10 @@
 import TV from "../models/TV";
-import DeviceView from "./DeviceView";
 
 import svgTV from "../../img/tv.svg";
 
-export default class viewTV extends DeviceView {
+export default class viewTV {
   constructor(tv, root, deleteFn) {
-    super(root);
+    this._root = root;
     this._tv = tv;
     this._root = root;
     this._deleteDeviceFn = deleteFn;
@@ -15,7 +14,7 @@ export default class viewTV extends DeviceView {
     this.render();
   }
   _handleDeleteDeviceBtn() {
-    this._deleteDeviceFn(this._tv, this);
+    this._deleteDeviceFn(this._tv);
   }
   _handlePrevChannelBtn() {
     this._tv.toPrevChannel();

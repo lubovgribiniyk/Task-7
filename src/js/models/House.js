@@ -6,7 +6,7 @@ export default class House {
     this._devices = new Map();
   }
   get devices() {
-    return [...this._devices];
+    return [...this._devices.values()];
   }
   get floor() {
     return this._floor;
@@ -28,7 +28,7 @@ export default class House {
       this._devices.delete(device.id);
     }
   }
-  turnOffAllDEvices() {
+  turnOffAllDevices() {
     this._devices.forEach(device => device.turnOff());
   }
   getActiveDevices() {
