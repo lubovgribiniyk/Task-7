@@ -76,11 +76,13 @@ export default class TV extends Device {
   get volume() {
     return this._volume;
   }
-  setOffTimer(time, callback) {
-    this._offTimer = setTimeout(() => {
-      this.turnOff();
-      callback();
-    }, time * 1000);
+  setOffTimer(time) {
+    return new Promise(resolve => {
+      this._offTimer = setTimeout(() => {
+        this.turnOff();
+        resolve();
+      }, time * 1000);
+    });
   }
   clearOffTimer() {
     if (this._offTimer) {

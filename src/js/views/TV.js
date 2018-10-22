@@ -1,10 +1,7 @@
-import TV from "../models/TV";
-
 import svgTV from "../../img/tv.svg";
 
 export default class viewTV {
   constructor(tv, root, deleteFn) {
-    this._root = root;
     this._tv = tv;
     this._root = root;
     this._deleteDeviceFn = deleteFn;
@@ -28,11 +25,12 @@ export default class viewTV {
     const timerValue = parseInt(
       this._root.querySelector(".tv-timer__input").value
     );
+
     if (timerValue) {
-      this._tv.setOffTimer(timerValue, () => {
+      this._tv.setOffTimer(timerValue).then(() => {
         this.render();
       });
-      this._updateTimerState();
+      this.render();
     }
   }
   _handleAddVolumeBtn() {
@@ -42,15 +40,6 @@ export default class viewTV {
   _handleSubVolumeBtn() {
     this._tv.downVolume();
     this.render();
-  }
-  _updateTimerState() {
-    const newTimerHolder = this._createTimerBlock();
-    const currentTimerHolder = this._root.querySelector(".tv-timer");
-
-    currentTimerHolder.parentElement.replaceChild(
-      newTimerHolder,
-      currentTimerHolder
-    );
   }
 
   _createTitleBlock() {
@@ -134,7 +123,7 @@ export default class viewTV {
     prevChannelBtn.type = "button";
     prevChannelBtn.innerText = "< Предыдущий канал";
     prevChannelBtn.classList.add("change-button");
-    prevChannelBtn.disabled = this._tv.isOn ? false : true;
+    prevChannelBtn.disabled = !this._tv.isOn;
     prevChannelBtn.addEventListener(
       "click",
       this._handlePrevChannelBtn.bind(this)
@@ -143,7 +132,7 @@ export default class viewTV {
     const nextChannelBtn = document.createElement("button");
     nextChannelBtn.type = "button";
     nextChannelBtn.innerText = "Следующий канал >";
-    nextChannelBtn.disabled = this._tv.isOn ? false : true;
+    nextChannelBtn.disabled = !this._tv.isOn;
     nextChannelBtn.classList.add("change-button");
     nextChannelBtn.addEventListener(
       "click",
@@ -173,12 +162,12 @@ export default class viewTV {
       timerInput.min = 0;
       timerInput.max = 30;
       timerInput.classList.add("tv-timer__input");
-      timerInput.disabled = this._tv.isOn ? false : true;
+      timerInput.disabled = !this._tv.isOn;
 
       const timerButton = document.createElement("button");
       timerButton.type = "button";
       timerButton.innerText = "Включить таймер";
-      timerButton.disabled = this._tv.isOn ? false : true;
+      timerButton.disabled = !this._tv.isOn;
       timerButton.addEventListener("click", this._handleTimerBtn.bind(this));
 
       timerHolder.appendChild(timerInput);
@@ -202,14 +191,14 @@ export default class viewTV {
     addVolumeBtn.type = "button";
     addVolumeBtn.innerText = "Увеличить громкость";
     addVolumeBtn.classList.add("change-button");
-    addVolumeBtn.disabled = this._tv.isOn ? false : true;
+    addVolumeBtn.disabled = !this._tv.isOn;
     addVolumeBtn.addEventListener("click", this._handleAddVolumeBtn.bind(this));
 
     const subVolumeBtn = document.createElement("button");
     subVolumeBtn.type = "button";
     subVolumeBtn.innerText = "Уменьшить громкость";
     subVolumeBtn.classList.add("change-button");
-    subVolumeBtn.disabled = this._tv.isOn ? false : true;
+    subVolumeBtn.disabled = !this._tv.isOn;
     subVolumeBtn.addEventListener("click", this._handleSubVolumeBtn.bind(this));
 
     soundHolder.appendChild(subVolumeBtn);

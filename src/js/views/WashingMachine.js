@@ -13,7 +13,7 @@ export default class ViewWashingMachine {
     if (this._washingMachine.isOn) {
       this._washingMachine.turnOff();
     } else {
-      this._washingMachine.turnOn(() => {
+      this._washingMachine.turnOn().then(() => {
         this.render();
       });
     }

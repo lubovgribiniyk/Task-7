@@ -20,17 +20,17 @@ export default class WashingMachine extends Device {
     this._clothes = [];
     this._offTimer = null;
   }
-  turnOn(callback) {
+  turnOn() {
     if (this._mode) {
       super.turnOn();
-      this._offTimer = setTimeout(() => {
-        this.turnOff();
-        if (callback) {
-          callback();
-        }
-      }, WashingMachine.SUPPORTED_MODES_TIME[this.mode] * 1000);
+      this._powder = false;
+      return new Promise(resolve => {
+        this._offTimer = setTimeout(() => {
+          this.turnOff();
+          resolve();
+        }, WashingMachine.SUPPORTED_MODES_TIME[this.mode] * 1000);
+      });
     }
-    this._powder = false;
   }
   turnOff() {
     this.clearOffTimer();
